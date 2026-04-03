@@ -1,0 +1,213 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { background: #1a1a1a; padding: 2rem 1rem; border-radius: 12px; }
+  .controls { max-width: 600px; margin: 0 auto 1rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .controls label { font-family: Arial, sans-serif; font-size: 12px; color: #aaa; }
+  .controls input[type=text] { background: #2a2a2a; border: 0.5px solid #444; border-radius: 8px; color: #fff; font-size: 14px; padding: 6px 12px; width: 170px; outline: none; }
+  .copy-btn { font-size: 12px; padding: 6px 14px; background: transparent; color: #aaa; border: 0.5px solid #444; border-radius: 8px; cursor: pointer; font-family: Arial, sans-serif; margin-left: auto; }
+
+  .email { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; font-family: Georgia, serif; color: #1a1a1a; }
+
+  .hero { position: relative; height: 340px; overflow: hidden; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(10,40,15,0.9) 100%); }
+  .hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; text-align: center; }
+  .hero-tag { display: inline-block; background: #c0392b; color: #fff; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 16px; }
+  .hero-title { font-size: 36px; font-weight: 700; color: #fff; line-height: 1.15; font-family: Georgia, serif; }
+  .hero-name { font-size: 15px; color: rgba(255,255,255,0.8); font-family: Arial, sans-serif; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .body { padding: 2rem; }
+
+  .heart-block { text-align: center; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid #eee; }
+  .heart-circle { width: 56px; height: 56px; background: #fff5f4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+  .ht { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+  .hs { font-size: 15px; color: #555; line-height: 1.8; font-family: Arial, sans-serif; }
+
+  .section-lbl { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #c0392b; margin-bottom: 14px; text-align: center; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 1.75rem; }
+  .stat { background: #1a5c2a; border-radius: 10px; padding: 1rem 0.5rem; text-align: center; }
+  .stat-num { font-size: 20px; font-weight: 700; color: #fff; font-family: Arial, sans-serif; }
+  .stat-lbl { font-size: 10px; color: #9FE1CB; font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; line-height: 1.3; }
+
+  .cost-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.75rem; }
+  .cost-card { border: 1.5px solid #1a5c2a; border-radius: 10px; padding: 1rem; text-align: center; }
+  .cost-amt { font-size: 28px; font-weight: 700; color: #1a5c2a; font-family: Arial, sans-serif; }
+  .cost-desc { font-size: 11px; color: #555; font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+  .flame-quote { border-left: 4px solid #c0392b; padding: 1rem 1.25rem; margin: 0 0 1.75rem; background: #fff8f7; border-radius: 0 8px 8px 0; }
+  .flame-quote p { font-size: 16px; font-style: italic; color: #1a1a1a; line-height: 1.8; }
+
+  .report-btn { display: flex; align-items: center; gap: 14px; background: #f4f9f5; border: 1.5px solid #1a5c2a; border-radius: 10px; padding: 1.1rem 1.25rem; text-decoration: none; margin: 0 0 1.75rem; }
+  .report-icon { width: 44px; height: 44px; background: #1a5c2a; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .report-text .rt { font-size: 14px; font-weight: 700; color: #1a5c2a; font-family: Arial, sans-serif; }
+  .report-text .rs { font-size: 12px; color: #555; font-family: Arial, sans-serif; margin-top: 3px; }
+  .report-arrow { margin-left: auto; font-size: 20px; color: #1a5c2a; }
+
+  .share-section { background: #f9f9f9; border-radius: 10px; padding: 1.25rem; text-align: center; margin-bottom: 1.75rem; }
+  .share-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .share-sub { font-family: Arial, sans-serif; font-size: 13px; color: #666; margin-bottom: 14px; line-height: 1.5; }
+  .share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .sbtn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 50px; font-family: Arial, sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .sbtn.wa { background: #25D366; color: #fff; }
+  .sbtn.give { background: #c0392b; color: #fff; }
+
+  .sign-off { font-size: 15px; color: #333; line-height: 1.9; border-top: 1px solid #eee; padding-top: 1.5rem; }
+
+  .motto-footer { text-align: center; padding: 1.25rem 2rem; background: #1a5c2a; }
+  .motto-text { color: #fff; font-size: 14px; font-style: italic; letter-spacing: 0.5px; }
+  .email-footer { background: #111; padding: 1rem 2rem; text-align: center; }
+  .email-footer p { font-family: Arial, sans-serif; font-size: 11px; color: #888; line-height: 1.8; }
+</style>
+
+<div class="wrap">
+  <div class="controls">
+    <label>Donor name</label>
+    <input type="text" id="donor-name" value="Sarah" oninput="update()">
+    <button class="copy-btn" onclick="copyText()">Copy email text</button>
+  </div>
+
+  <div class="email" id="email-preview">
+
+    <div class="hero">
+      <img src="https://ik.imagekit.io/vddpcxj7e/FNM06246.JPG?tr=f-auto,q-auto,w-1200" alt="Mathare Crusade">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-tag">Firebrand Nation</div>
+        <div class="hero-title">Thank you for<br>your gift</div>
+        <div class="hero-name" id="hero-name">Dear Sarah — you made this possible</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="heart-block">
+        <div class="heart-circle">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#c0392b"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <div class="ht" id="thank-title">Thank you, Sarah!</div>
+        <p class="hs">Your generosity is not just a transaction — it is a declaration that people in Mathare matter. Because of partners like you, lives are being transformed, families are being fed, and souls are being won to Christ.</p>
+      </div>
+
+      <div class="section-lbl">This is the impact your gift is doing</div>
+
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-num">5,136</div><div class="stat-lbl">Reached with Gospel</div></div>
+        <div class="stat"><div class="stat-num">1,097</div><div class="stat-lbl">Souls won</div></div>
+        <div class="stat"><div class="stat-num">450</div><div class="stat-lbl">Salvations</div></div>
+        <div class="stat"><div class="stat-num">875</div><div class="stat-lbl">One-on-one evangelism</div></div>
+        <div class="stat"><div class="stat-num">345</div><div class="stat-lbl">Volunteers mobilised</div></div>
+        <div class="stat"><div class="stat-num">1,566</div><div class="stat-lbl">People fed</div></div>
+      </div>
+
+      <div class="cost-row">
+        <div class="cost-card"><div class="cost-amt">$8</div><div class="cost-desc">Cost to reach one soul</div></div>
+        <div class="cost-card"><div class="cost-amt">$38</div><div class="cost-desc">Cost per soul won</div></div>
+      </div>
+
+      <div class="flame-quote">
+        <p>"Every number above is a real person — a mother, a young man, a child — whose life has been touched. Your generosity is written into each one of those stories. Thank you."</p>
+      </div>
+
+      <div class="section-lbl">Read the full impact report</div>
+      <a href="https://www.firebrandnation.com/_files/ugd/a6ba7b_3943f0030f604329b4d4e0a08d0174a8.pdf" target="_blank" class="report-btn">
+        <div class="report-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <div class="report-text">
+          <div class="rt">Mathare Mega Crusade — Full Impact Report</div>
+          <div class="rs">Click to open and read the complete report (PDF)</div>
+        </div>
+        <div class="report-arrow">&#8594;</div>
+      </a>
+
+      <div class="share-section">
+        <div class="share-title">Help us reach even further</div>
+        <p class="share-sub">Know someone whose heart might be moved to give? Share the crusade with them and let the fire spread.</p>
+        <div class="share-btns">
+          <a href="https://wa.me/?text=I%20just%20gave%20to%20the%20Mathare%20Mega%20Crusade%20by%20Firebrand%20Nation.%20Join%20me%20in%20making%20a%20difference!%20https%3A%2F%2Fsecure.givelively.org%2Fdonate%2Feternal-lifes-restoration-outreach" target="_blank" class="sbtn wa">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Share on WhatsApp
+          </a>
+          <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach" target="_blank" class="sbtn give">
+            Give again
+          </a>
+        </div>
+      </div>
+
+      <div class="sign-off">
+        <p>We are deeply grateful for you. Your gift is not just a number — it is a name, a story, a life forever changed in Mathare. We will keep you updated as the next crusade unfolds on <strong>March 6, 2026</strong>.</p>
+        <br>
+        <p>With gratitude and faith,<br><strong>The Firebrand Nation Team</strong></p>
+      </div>
+
+    </div>
+
+    <div class="motto-footer">
+      <div class="motto-text">Alone a flame. Together a fire.</div>
+    </div>
+    <div class="email-footer">
+      <p>Firebrand Nation &nbsp;|&nbsp; Eternal Life's Restoration Outreach<br>
+      Questions? Reply to this email &nbsp;·&nbsp; To unsubscribe, reply "Unsubscribe"</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function update() {
+  const name = document.getElementById('donor-name').value.trim() || 'Friend';
+  document.getElementById('hero-name').textContent = 'Dear ' + name + ' — you made this possible';
+  document.getElementById('thank-title').textContent = 'Thank you, ' + name + '!';
+}
+
+function copyText() {
+  const name = document.getElementById('donor-name').value.trim() || 'Friend';
+  const t = `SUBJECT: Thank you, ${name} — see the impact your gift is making
+
+Dear ${name},
+
+Your generosity is not just a transaction — it is a declaration that people in Mathare matter. Because of partners like you, lives are being transformed, families are being fed, and souls are being won to Christ.
+
+THIS IS THE IMPACT YOUR GIFT IS DOING:
+
+  - 5,136 people reached with the Gospel
+  - 1,097 souls won
+  - 450 salvations recorded
+  - 875 one-on-one evangelism encounters
+  - 345 volunteers mobilised
+  - 1,566 people fed with food donations
+  - $8 reaches one soul with the Gospel
+  - $38 wins one soul to Christ
+
+"Every number above is a real person — a mother, a young man, a child — whose life has been touched. Your generosity is written into each one of those stories. Thank you."
+
+READ THE FULL IMPACT REPORT:
+https://www.firebrandnation.com/_files/ugd/a6ba7b_3943f0030f604329b4d4e0a08d0174a8.pdf
+
+Know someone whose heart might be moved to give? Share this link with them:
+https://secure.givelively.org/donate/eternal-lifes-restoration-outreach
+
+We are deeply grateful for you. Your gift is not just a number — it is a name, a story, a life forever changed in Mathare. We will keep you updated as the next crusade unfolds on March 6, 2026.
+
+With gratitude and faith,
+The Firebrand Nation Team
+
+Alone a flame. Together a fire.
+Firebrand Nation | Eternal Life's Restoration Outreach
+To unsubscribe, reply "Unsubscribe"`;
+  navigator.clipboard.writeText(t).then(() => {
+    const b = document.querySelector('.copy-btn');
+    b.textContent = 'Copied!';
+    setTimeout(() => b.textContent = 'Copy email text', 2000);
+  });
+}
+
+update();
+</script>
